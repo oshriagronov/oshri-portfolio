@@ -60,6 +60,11 @@ To get a local copy up and running follow these simple steps.
 <br/> [http://localhost:5173](http://localhost:5173/)
 
 > I used Contentful as a headless CMS for the project’s assets. You can use anything you like, but you should create a .env file and enter the relevant information to access the assets.
+> the structure shoud be like this:
+>
+> VITE_SPACE_ID = {enter the space id of Contentful}
+> 
+> VITE_ACCESS_TOKEN = {enter the access tokken of Contentful}
 
 ## Acknowledgements
 
