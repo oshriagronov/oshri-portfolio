@@ -23,12 +23,14 @@
   }
   /* Applies a white background color. */
   .background {
-    @apply bg-white;
+    /* Theme-aware background/text with smooth transitions. */
+    @apply min-h-screen bg-white text-slate-900 dark:bg-slate-950 dark:text-slate-100 transition-colors duration-300;
   }
 
   /* Highlights text with blue color. */
   .highlight {
-    @apply text-blue-500;
+    /* Slightly softer blue in dark mode for contrast. */
+    @apply text-blue-500 dark:text-blue-400;
   }
   /* Makes text bold for titles. */
   .title {
@@ -36,19 +38,19 @@
   }
   /* Subdued gray color for secondary text. */
   .sub-text {
-    @apply text-gray-600;
+    /* Lighten secondary text in dark mode. */
+    @apply text-gray-600 dark:text-slate-300;
   }
 
   /* Adds highlight effect on hover with smooth transition. */
-  .hover-effect{
-    @apply hover:highlight duration-300
+  .hover-effect {
+    @apply hover:highlight transition-colors duration-300;
   }
   /* Sizing for icon buttons. */
-  .icon-button{
-    @apply h-8 w-8
+  .icon-button {
+    @apply h-8 w-8;
   }
 }
-
 
 /*
  * Keyframe animation for rotating spinner (used in loading indicator).

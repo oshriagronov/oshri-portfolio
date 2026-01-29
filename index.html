@@ -1,10 +1,19 @@
 <!DOCTYPE html>
-<html lang="en" class="bg-slate-50 scroll-smooth">
+<html lang="en" class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/portfolio-icon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Oshri Agronov</title>
+    <script>
+      (function () {
+        // Apply the theme class before React renders to avoid a flash.
+        const storedTheme = localStorage.getItem("theme");
+        const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        const useDark = storedTheme ? storedTheme === "dark" : prefersDark;
+        document.documentElement.classList.toggle("dark", useDark);
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

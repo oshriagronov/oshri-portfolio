@@ -9,7 +9,7 @@ const Hero = () => {
           {/* Main heading introducing Oshri with an emoji and highlighted name */}
           <h1 className="text-4xl title mb-8 tracking-tight sm:text-5xl md:text-7xl">
           Hi
-            <span class="inline-block ml-4">👋</span>
+            <span className="inline-block ml-4">👋</span>
             , I'm <span className="highlight">Oshri</span> a curious mind in software, always creating.
           </h1>
           {/* Subheading describing Oshri's passion and skills */}
@@ -30,10 +30,11 @@ const Hero = () => {
       {/* Arrow navigation link that scrolls down to the projects section with hover animations */}
       <div className="flex justify-center">
         <a href="#projects" className="flex items-center duration-300 hover:scale-130 hover:-translate-y-1">
+          {/* Invert icon in dark mode for visibility. */}
           <img
             src={arrowDown}
             alt="An arrow pointing down"
-            className="h-8 w-8"
+            className="h-8 w-8 dark:invert"
           />
         </a>
       </div>
