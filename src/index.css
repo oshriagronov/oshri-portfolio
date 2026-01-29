@@ -24,7 +24,7 @@
   /* Applies a white background color. */
   .background {
     /* Theme-aware background/text with smooth transitions. */
-    @apply min-h-screen bg-white text-slate-900 dark:bg-slate-950 dark:text-slate-100 transition-colors duration-300;
+    @apply min-h-screen bg-white text-slate-900 dark:bg-black dark:text-slate-100 transition-colors duration-300;
   }
 
   /* Highlights text with blue color. */

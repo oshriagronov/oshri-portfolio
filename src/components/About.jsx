@@ -4,7 +4,7 @@ const About = () => {
   return (
     <section className="scroll-mt-20 py-20" id="about">
       {/* Container for aligning content vertically and centering items */}
-      <div className="align-element items-center">
+      <div className="align-element text-center items-center">
         {/* Section title */}
         <h2 className="text-3xl title mb-6">About me 👨‍💻</h2>
         {/* Paragraph describing personal background and aspirations */}

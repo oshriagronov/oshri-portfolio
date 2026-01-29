@@ -8,7 +8,9 @@ const getSystemTheme = () =>
 // Navbar component renders the top navigation bar of the website
 const Navbar = () => {
   // Persisted theme override ("light"/"dark") or "system" fallback.
-  const [theme, setTheme] = useState(() => localStorage.getItem("theme") || "system");
+  const [theme, setTheme] = useState(
+    () => localStorage.getItem("theme") || "system",
+  );
   // Current OS theme, used when the setting is "system".
   const [systemTheme, setSystemTheme] = useState(() => getSystemTheme());
 
@@ -50,7 +52,7 @@ const Navbar = () => {
 
   return (
     // The nav element is fixed at the top with a semi-transparent white background and blur effect for a sleek look
-    <nav className="bg-white/90 dark:bg-slate-900/80 backdrop-blur-sm fixed w-full top-0 z-[9999] transition-colors duration-300">
+    <nav className="bg-white/90 dark:bg-black/80 backdrop-blur-sm fixed w-full top-0 z-[9999] transition-colors duration-300">
       <div className="mx-auto max-w-7xl py-4 px-4 flex flex-col gap-4 sm:flex-row sm:items-center sm:py-8">
         {/* Website title with highlighted 'Dev' part for branding */}
         <h2 className="text-3xl title">
@@ -76,7 +78,9 @@ const Navbar = () => {
           <button
             type="button"
             onClick={toggleTheme}
-            aria-label={isDark ? "Switch to light theme" : "Switch to dark theme"}
+            aria-label={
+              isDark ? "Switch to light theme" : "Switch to dark theme"
+            }
             className="relative inline-flex h-9 w-16 items-center rounded-full bg-slate-200/90 dark:bg-slate-700/90 shadow-sm transition-colors duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-500"
           >
             <span className="pointer-events-none relative z-10 inline-flex w-full items-center justify-between px-2 text-sm">
