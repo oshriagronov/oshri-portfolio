@@ -79,7 +79,7 @@ const Navbar = () => {
             aria-label={isDark ? "Switch to light theme" : "Switch to dark theme"}
             className="relative inline-flex h-9 w-16 items-center rounded-full bg-slate-200/90 dark:bg-slate-700/90 shadow-sm transition-colors duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-500"
           >
-            <span className="pointer-events-none inline-flex w-full items-center justify-between px-2 text-xs">
+            <span className="pointer-events-none relative z-10 inline-flex w-full items-center justify-between px-2 text-sm">
               <span
                 className={`transition-opacity duration-300 ${
                   isDark ? "opacity-0" : "opacity-100"
@@ -98,7 +98,7 @@ const Navbar = () => {
               </span>
             </span>
             <span
-              className={`absolute left-1 top-1 h-7 w-7 rounded-full bg-white dark:bg-slate-200 shadow-md transition-transform duration-300 ease-in-out ${
+              className={`absolute left-1 top-1 z-0 h-7 w-7 rounded-full bg-white dark:bg-slate-200 shadow-md transition-transform duration-300 ease-in-out ${
                 isDark ? "translate-x-7" : "translate-x-0"
               }`}
             />
