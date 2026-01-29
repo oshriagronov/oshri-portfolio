@@ -6,7 +6,7 @@
 
 <h3 align="center">Portfolio</h3>
   <p align="center">
-    This project was created as a milestone task to demonstrate my proficiency in React and showcase my work.
+    A React portfolio showcasing my work.
   </p>
 </div>
 
