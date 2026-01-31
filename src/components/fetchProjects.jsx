@@ -23,7 +23,7 @@ const useFetchProjects = () => {
       // Map over response items to extract relevant fields for each project
       const projects = response?.items.map((item) => {
         const { title, text, img, url, github, stack } = item.fields;
-        const id = img?.sys?.id;
+        const id = item?.sys?.id;
         const imageSrc = img?.fields?.file?.url;
         return { title, url, id, imageSrc, text, github, stack };
       });

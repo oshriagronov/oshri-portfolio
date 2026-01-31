@@ -1,7 +1,9 @@
+import { useState } from "react";
 import ProjectsCard from "./ProjectsCard";
 import useFetchProjects from "./fetchProjects";
 
 const Projects = () => {
+  const [openCards, setOpenCards] = useState(() => new Set());
   // Fetch projects data and loading state using custom hook
   const { isLoading, projects } = useFetchProjects();
   // Show loading indicator while data is being fetched
@@ -15,9 +17,30 @@ const Projects = () => {
       </h2>
 
       {/* Dynamically render each project using the ProjectsCard component */}
-      <div className="flex flex-col gap-16 md:gap-24">
-        {projects.map((project) => {
-          return <ProjectsCard key={project.id} {...project} />;
+      <div className="grid items-start gap-8 md:gap-10 lg:grid-cols-3">
+        {projects.map((project, index) => {
+          const cardId =
+            project?.id ?? project?.title ?? `project-card-${index}`;
+          const isOpen = openCards.has(cardId);
+          const handleToggle = () => {
+            setOpenCards((prev) => {
+              const next = new Set(prev);
+              if (next.has(cardId)) {
+                next.delete(cardId);
+              } else {
+                next.add(cardId);
+              }
+              return next;
+            });
+          };
+          return (
+            <ProjectsCard
+              key={cardId}
+              {...project}
+              isOpen={isOpen}
+              onToggle={handleToggle}
+            />
+          );
         })}
       </div>
     </section>
