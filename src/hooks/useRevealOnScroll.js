@@ -21,6 +21,13 @@ const useRevealOnScroll = (deps = []) => {
       return;
     }
 
+    if (typeof IntersectionObserver === "undefined") {
+      revealElements.forEach((element) => {
+        element.classList.add("is-visible");
+      });
+      return;
+    }
+
     const observer = new IntersectionObserver(
       (entries, obs) => {
         entries.forEach((entry) => {
@@ -29,7 +36,7 @@ const useRevealOnScroll = (deps = []) => {
           obs.unobserve(entry.target);
         });
       },
-      { threshold: 0.2, rootMargin: "0px 0px -10% 0px" },
+      { threshold: 0.15, rootMargin: "0px" },
     );
 
     revealElements.forEach((element) => {
