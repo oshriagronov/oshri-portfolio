@@ -4,7 +4,7 @@ const ProjectsCard = ({ url, imageSrc, github, title, text, stack }) => {
   return (
     // Project card layout with grid, shadow, and rounded corners
     // Theme-aware card surface for light/dark modes. */
-    <article className="grid md:grid-cols-2 gap-12 items-stretch rounded-2xl bg-white/80 dark:bg-slate-900/60 shadow-md hover:shadow-xl transition-colors duration-300">
+    <article className="grid md:grid-cols-2 gap-12 items-stretch rounded-2xl bg-white/80 dark:bg-slate-900/60 border border-gray-200 hover:border-2 hover:border-blue-500 transition-colors duration-300">
       {/* Project image */}
       <div className="rounded-2xl overflow-hidden h-full flex items-center">
         <img
