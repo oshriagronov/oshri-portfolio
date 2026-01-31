@@ -1,33 +1,17 @@
-import { useLayoutEffect, useRef, useState } from "react";
+import { useState } from "react";
 import ProjectsCard from "./ProjectsCard";
 import useFetchProjects from "./fetchProjects";
 
 const Projects = () => {
   const [openCards, setOpenCards] = useState(() => new Set());
   const [showAll, setShowAll] = useState(false);
-  const [collapsedHeight, setCollapsedHeight] = useState(0);
-  const [expandedHeight, setExpandedHeight] = useState(0);
-  const gridRef = useRef(null);
-  const cardRefs = useRef([]);
   // Fetch projects data and loading state using custom hook
   const { isLoading, projects } = useFetchProjects();
-
-  cardRefs.current = [];
-
-  useLayoutEffect(() => {
-    if (isLoading) return;
-    if (!gridRef.current) return;
-    const cards = cardRefs.current.filter(Boolean);
-    if (!cards.length) return;
-    const firstRowCards = cards.slice(0, 3);
-    const rowHeight = Math.max(...firstRowCards.map((card) => card.offsetHeight));
-    const fullHeight = gridRef.current.scrollHeight;
-    setCollapsedHeight((prev) => (prev !== rowHeight ? rowHeight : prev));
-    setExpandedHeight((prev) => (prev !== fullHeight ? fullHeight : prev));
-  }, [projects, openCards, showAll]);
   // Show loading indicator while data is being fetched
   if (isLoading) return <div className="loading"></div>;
   // Render the projects section with a title and a list of project cards
+  const visibleProjects = projects.slice(0, 3);
+  const extraProjects = projects.slice(3);
   return (
     <section className="scroll-mt-20 py-20 align-element" id="projects">
       {/* Section title */}
@@ -36,17 +20,8 @@ const Projects = () => {
       </h2>
 
       {/* Dynamically render each project using the ProjectsCard component */}
-      <div
-        className="overflow-hidden transition-[max-height] duration-300 ease-in-out"
-        style={{
-          maxHeight: showAll ? expandedHeight : collapsedHeight,
-        }}
-      >
-        <div
-          ref={gridRef}
-          className="grid items-start gap-8 md:gap-10 lg:grid-cols-3"
-        >
-          {projects.map((project, index) => {
+      <div className="grid items-start gap-8 md:gap-10 lg:grid-cols-3">
+        {visibleProjects.map((project, index) => {
           const cardId =
             project?.id ?? project?.title ?? `project-card-${index}`;
           const isOpen = openCards.has(cardId);
@@ -67,21 +42,51 @@ const Projects = () => {
               {...project}
               isOpen={isOpen}
               onToggle={handleToggle}
-              cardRef={(el) => {
-                if (el) {
-                  cardRefs.current[index] = el;
-                }
-              }}
             />
           );
-          })}
-        </div>
+        })}
       </div>
+      {extraProjects.length ? (
+        <div
+          className="overflow-hidden pb-3 transition-[max-height,opacity] duration-300 ease-in-out"
+          style={{
+            maxHeight: showAll ? "9999px" : 0,
+            opacity: showAll ? 1 : 0,
+          }}
+        >
+          <div className="mt-8 grid items-start gap-8 md:gap-10 lg:grid-cols-3">
+            {extraProjects.map((project, index) => {
+              const cardId =
+                project?.id ?? project?.title ?? `project-card-${index + 3}`;
+              const isOpen = openCards.has(cardId);
+              const handleToggle = () => {
+                setOpenCards((prev) => {
+                  const next = new Set(prev);
+                  if (next.has(cardId)) {
+                    next.delete(cardId);
+                  } else {
+                    next.add(cardId);
+                  }
+                  return next;
+                });
+              };
+              return (
+                <ProjectsCard
+                  key={cardId}
+                  {...project}
+                  isOpen={isOpen}
+                  onToggle={handleToggle}
+                />
+              );
+            })}
+          </div>
+        </div>
+      ) : null}
       {projects.length > 3 ? (
         <div className="mt-10 flex justify-center">
           <button
             type="button"
-            className="rounded-full border border-gray-200 px-6 py-2 text-base font-semibold text-gray-500 transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-gray-200 hover:text-slate-900 active:translate-y-0 active:scale-95 dark:hover:text-blue-500"
+            className="rounded-full bg-black px-6 py-2 text-lg font-semibold text-white transition-all duration-300 hover:scale-110 hover:-translate-y-1 hover:bg-slate-900 dark:bg-white dark:text-black dark:hover:bg-slate-100"
             onClick={() => setShowAll((prev) => !prev)}
           >
             {showAll ? "Show less" : "Show more"}
