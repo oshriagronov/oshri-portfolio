@@ -9,11 +9,19 @@ const ProjectsCard = ({
   stack,
   isOpen,
   onToggle,
+  revealDelay = 0,
 }) => {
+  const revealStyle = {
+    "--reveal-delay": `${revealDelay}ms`,
+  };
   return (
     // Project card layout with grid, shadow, and rounded corners
     // Theme-aware card surface for light/dark modes. */
-    <article className="flex self-start flex-col gap-6 rounded-2xl bg-white/80 p-6 dark:bg-slate-900/60 border-2 border-gray-200 hover:border-blue-500 transition-colors duration-300">
+    <article
+      data-reveal
+      style={revealStyle}
+      className="reveal-on-scroll flex self-start flex-col gap-6 rounded-2xl border-2 border-gray-200 bg-white/80 p-6 hover:border-blue-500 dark:bg-slate-900/60"
+    >
       {/* Project image */}
       <div className="h-48 w-full rounded-2xl overflow-hidden">
         <img

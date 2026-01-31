@@ -1,21 +1,31 @@
 import { useState } from "react";
 import ProjectsCard from "./ProjectsCard";
 import useFetchProjects from "./fetchProjects";
+import useRevealOnScroll from "../hooks/useRevealOnScroll";
 
 const Projects = () => {
   const [openCards, setOpenCards] = useState(() => new Set());
   const [showAll, setShowAll] = useState(false);
   // Fetch projects data and loading state using custom hook
   const { isLoading, projects } = useFetchProjects();
+  const revealRef = useRevealOnScroll([projects.length, showAll]);
   // Show loading indicator while data is being fetched
   if (isLoading) return <div className="loading"></div>;
   // Render the projects section with a title and a list of project cards
   const visibleProjects = projects.slice(0, 3);
   const extraProjects = projects.slice(3);
   return (
-    <section className="scroll-mt-20 py-20 align-element" id="projects">
+    <section
+      ref={revealRef}
+      className="scroll-mt-20 py-20 align-element"
+      id="projects"
+    >
       {/* Section title */}
-      <h2 className="text-3xl text-center title mb-12 md:mb-16">
+      <h2
+        data-reveal
+        style={{ "--reveal-delay": "0ms" }}
+        className="reveal-on-scroll text-3xl text-center title mb-12 md:mb-16"
+      >
         Some of my recent projects <span className="hidden md:inline-block">🔭</span>
       </h2>
 
@@ -42,6 +52,7 @@ const Projects = () => {
               {...project}
               isOpen={isOpen}
               onToggle={handleToggle}
+              revealDelay={120 + index * 90}
             />
           );
         })}
@@ -76,6 +87,7 @@ const Projects = () => {
                   {...project}
                   isOpen={isOpen}
                   onToggle={handleToggle}
+                  revealDelay={120 + (index + 3) * 90}
                 />
               );
             })}
@@ -83,7 +95,11 @@ const Projects = () => {
         </div>
       ) : null}
       {projects.length > 3 ? (
-        <div className="mt-10 flex justify-center">
+        <div
+          data-reveal
+          style={{ "--reveal-delay": "200ms" }}
+          className="reveal-on-scroll mt-10 flex justify-center"
+        >
           <button
             type="button"
             className="rounded-full bg-black px-6 py-2 text-lg font-semibold text-white transition-all duration-300 hover:scale-110 hover:-translate-y-1 hover:bg-slate-900 dark:bg-white dark:text-black dark:hover:bg-slate-100"
