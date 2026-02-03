@@ -1,4 +1,4 @@
-import heroImg from "../assets/hero.svg";
+import meImg from "../assets/me.png";
 import arrowDown from "../assets/down-arrow-1.svg";
 const Hero = () => {
   return (
@@ -27,11 +27,13 @@ const Hero = () => {
         </article>
         {/* Image illustrating the hero section, hidden on smaller screens */}
         <article className="hidden md:block">
-          <img
-            src={heroImg}
-            alt="A man working on the laptop with a screen beside it"
-            className="w-full h-full object-cover"
-          />
+          <div className="h-96 w-96 overflow-hidden rounded-full bg-gray-200 transition-colors duration-300 hover:bg-blue-500">
+            <img
+              src={meImg}
+              alt="Portrait of Oshri"
+              className="h-full w-full object-cover"
+            />
+          </div>
         </article>
       </div>
       {/* Arrow navigation link that scrolls down to the projects section with hover animations */}
