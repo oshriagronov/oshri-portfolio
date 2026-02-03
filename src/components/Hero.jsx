@@ -38,7 +38,7 @@ const Hero = () => {
       <div className="flex justify-center">
         <a
           href="#projects"
-          className="flex items-center duration-300 hover:scale-130 hover:-translate-y-1"
+          className="flex items-center arrow-loop"
         >
           {/* Invert icon in dark mode for visibility. */}
           <img
