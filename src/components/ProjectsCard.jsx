@@ -46,14 +46,14 @@ const ProjectsCard = ({
       <div className="flex flex-col gap-4">
         {/* Action icons for website and GitHub links */}
         <div className="flex">
-          <a href={url}>
+          <a href={url} target="_blank" rel="noreferrer">
             <TbWorldWww
               className={
                 url ? "icon-button mr-2 sub-text hover-effect" : "hidden"
               }
             />
           </a>
-          <a href={github}>
+          <a href={github} target="_blank" rel="noreferrer">
             <FaGithub
               className={
                 github ? "icon-button mr-2 sub-text hover-effect" : "hidden"

@@ -44,13 +44,25 @@ const Contact = () => {
           >
             <SiGmail className="icon-button sub-text hover-effect" />
           </a>
-          <a href="https://github.com/oshriagronov">
+          <a
+            href="https://github.com/oshriagronov"
+            target="_blank"
+            rel="noreferrer"
+          >
             <FaGithub className="icon-button sub-text hover-effect" />
           </a>
-          <a href="https://www.linkedin.com/in/oshri-agronov/">
+          <a
+            href="https://www.linkedin.com/in/oshri-agronov/"
+            target="_blank"
+            rel="noreferrer"
+          >
             <FaLinkedin className="icon-button sub-text hover-effect" />
           </a>
-          <a href="https://x.com/oshriagronov">
+          <a
+            href="https://x.com/oshriagronov"
+            target="_blank"
+            rel="noreferrer"
+          >
             <FaXTwitter className="icon-button sub-text hover-effect" />
           </a>
         </div>
