@@ -1,5 +1,7 @@
 import { FaGithub } from "react-icons/fa6";
 import { TbWorldWww } from "react-icons/tb";
+import { sanitizeUrl } from "../utils/sanitizeUrl.js";
+
 const ProjectsCard = ({
   url,
   imageSrc,
@@ -14,6 +16,10 @@ const ProjectsCard = ({
   const revealStyle = {
     "--reveal-delay": `${revealDelay}ms`,
   };
+
+  const safeUrl = sanitizeUrl(url);
+  const safeGithub = sanitizeUrl(github);
+
   return (
     // Project card layout with grid, shadow, and rounded corners
     // Theme-aware card surface for light/dark modes. */
@@ -35,9 +41,9 @@ const ProjectsCard = ({
       {/* Stack tags */}
       <div className="flex flex-wrap gap-2">
         {/* Stack pills with dark-mode background. */}
-        {stack?.map((item) => {
+        {stack?.map((item, index) => {
           return (
-            <span className="px-4 py-1.5 bg-gray-100 dark:bg-slate-800 shadow-md sub-text text-sm rounded-full">
+            <span key={index} className="px-4 py-1.5 bg-gray-100 dark:bg-slate-800 shadow-md sub-text text-sm rounded-full">
               {item}
             </span>
           );
@@ -46,17 +52,17 @@ const ProjectsCard = ({
       <div className="flex flex-col gap-4">
         {/* Action icons for website and GitHub links */}
         <div className="flex">
-          <a href={url}>
+          <a href={safeUrl} target="_blank" rel="noreferrer">
             <TbWorldWww
               className={
-                url ? "icon-button mr-2 sub-text hover-effect" : "hidden"
+                safeUrl ? "icon-button mr-2 sub-text hover-effect" : "hidden"
               }
             />
           </a>
-          <a href={github}>
+          <a href={safeGithub} target="_blank" rel="noreferrer">
             <FaGithub
               className={
-                github ? "icon-button mr-2 sub-text hover-effect" : "hidden"
+                safeGithub ? "icon-button mr-2 sub-text hover-effect" : "hidden"
               }
             />
           </a>
