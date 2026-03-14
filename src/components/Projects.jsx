@@ -14,6 +14,33 @@ const Projects = () => {
   // Render the projects section with a title and a list of project cards
   const visibleProjects = projects.slice(0, 3);
   const extraProjects = projects.slice(3);
+
+  const renderProject = (project, index) => {
+    const cardId =
+      project?.id ?? project?.title ?? `project-card-${index}`;
+    const isOpen = openCards.has(cardId);
+    const handleToggle = () => {
+      setOpenCards((prev) => {
+        const next = new Set(prev);
+        if (next.has(cardId)) {
+          next.delete(cardId);
+        } else {
+          next.add(cardId);
+        }
+        return next;
+      });
+    };
+    return (
+      <ProjectsCard
+        key={cardId}
+        {...project}
+        isOpen={isOpen}
+        onToggle={handleToggle}
+        revealDelay={120 + index * 90}
+      />
+    );
+  };
+
   return (
     <section
       ref={revealRef}
@@ -31,31 +58,7 @@ const Projects = () => {
 
       {/* Dynamically render each project using the ProjectsCard component */}
       <div className="grid items-start gap-8 md:gap-10 lg:grid-cols-3">
-        {visibleProjects.map((project, index) => {
-          const cardId =
-            project?.id ?? project?.title ?? `project-card-${index}`;
-          const isOpen = openCards.has(cardId);
-          const handleToggle = () => {
-            setOpenCards((prev) => {
-              const next = new Set(prev);
-              if (next.has(cardId)) {
-                next.delete(cardId);
-              } else {
-                next.add(cardId);
-              }
-              return next;
-            });
-          };
-          return (
-            <ProjectsCard
-              key={cardId}
-              {...project}
-              isOpen={isOpen}
-              onToggle={handleToggle}
-              revealDelay={120 + index * 90}
-            />
-          );
-        })}
+        {visibleProjects.map((project, index) => renderProject(project, index))}
       </div>
       {extraProjects.length ? (
         <div
@@ -66,31 +69,7 @@ const Projects = () => {
           }}
         >
           <div className="mt-8 grid items-start gap-8 md:gap-10 lg:grid-cols-3">
-            {extraProjects.map((project, index) => {
-              const cardId =
-                project?.id ?? project?.title ?? `project-card-${index + 3}`;
-              const isOpen = openCards.has(cardId);
-              const handleToggle = () => {
-                setOpenCards((prev) => {
-                  const next = new Set(prev);
-                  if (next.has(cardId)) {
-                    next.delete(cardId);
-                  } else {
-                    next.add(cardId);
-                  }
-                  return next;
-                });
-              };
-              return (
-                <ProjectsCard
-                  key={cardId}
-                  {...project}
-                  isOpen={isOpen}
-                  onToggle={handleToggle}
-                  revealDelay={120 + (index + 3) * 90}
-                />
-              );
-            })}
+            {extraProjects.map((project, index) => renderProject(project, index + 3))}
           </div>
         </div>
       ) : null}
