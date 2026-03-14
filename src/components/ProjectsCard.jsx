@@ -37,7 +37,10 @@ const ProjectsCard = ({
         {/* Stack pills with dark-mode background. */}
         {stack?.map((item) => {
           return (
-            <span className="px-4 py-1.5 bg-gray-100 dark:bg-slate-800 shadow-md sub-text text-sm rounded-full">
+            <span
+              key={item}
+              className="px-4 py-1.5 bg-gray-100 dark:bg-slate-800 shadow-md sub-text text-sm rounded-full"
+            >
               {item}
             </span>
           );
