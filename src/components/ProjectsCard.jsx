@@ -1,5 +1,6 @@
 import { FaGithub } from "react-icons/fa6";
 import { TbWorldWww } from "react-icons/tb";
+import { sanitizeUrl } from "../utils/sanitizeUrl";
 const ProjectsCard = ({
   url,
   imageSrc,
@@ -37,7 +38,7 @@ const ProjectsCard = ({
         {/* Stack pills with dark-mode background. */}
         {stack?.map((item) => {
           return (
-            <span className="px-4 py-1.5 bg-gray-100 dark:bg-slate-800 shadow-md sub-text text-sm rounded-full">
+            <span key={item} className="px-4 py-1.5 bg-gray-100 dark:bg-slate-800 shadow-md sub-text text-sm rounded-full">
               {item}
             </span>
           );
@@ -46,14 +47,14 @@ const ProjectsCard = ({
       <div className="flex flex-col gap-4">
         {/* Action icons for website and GitHub links */}
         <div className="flex">
-          <a href={url}>
+          <a href={sanitizeUrl(url)}>
             <TbWorldWww
               className={
                 url ? "icon-button mr-2 sub-text hover-effect" : "hidden"
               }
             />
           </a>
-          <a href={github}>
+          <a href={sanitizeUrl(github)}>
             <FaGithub
               className={
                 github ? "icon-button mr-2 sub-text hover-effect" : "hidden"
