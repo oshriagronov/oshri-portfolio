@@ -1,15 +1,23 @@
 export const sanitizeUrl = (url) => {
-  if (typeof url !== "string") return "#";
+  if (typeof url !== "string" || !url) return url;
+
+  // Remove leading and trailing whitespaces and control characters
   const trimmedUrl = url.trim();
-  if (trimmedUrl === "") return "#";
+
+  // Try to parse the URL
   try {
-    // URL relative paths can be supported by providing a base url
-    const parsed = new URL(trimmedUrl, "https://example.com");
-    if (["http:", "https:", "mailto:", "tel:"].includes(parsed.protocol)) {
-      return trimmedUrl;
+    // We use a dummy base URL to handle relative URLs
+    const parsedUrl = new URL(trimmedUrl, "http://dummy.com");
+    // Check if the protocol is a known dangerous protocol
+    if (["javascript:", "data:", "vbscript:"].includes(parsedUrl.protocol)) {
+      return undefined;
     }
   } catch {
-    return "#";
+    // If it fails to parse, it might be heavily obfuscated or invalid. It's safer to block it.
+    // E.g. `javascript:alert(1)` will parse successfully with `dummy.com` as base if `javascript:` was not recognized as protocol,
+    // but the URL constructor correctly recognizes `javascript:` as a protocol, even relative.
+    return undefined;
   }
-  return "#";
+
+  return trimmedUrl;
 };
