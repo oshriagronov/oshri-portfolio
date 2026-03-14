@@ -46,7 +46,7 @@ const useRevealOnScroll = (deps = []) => {
     });
 
     return () => observer.disconnect();
-  }, [containerRef, ...deps]);
+  }, [...deps]);
 
   return containerRef;
 };
