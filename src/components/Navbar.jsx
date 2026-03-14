@@ -42,10 +42,11 @@ const Navbar = () => {
   useEffect(() => {
     let rafId = null;
 
+    const sections = links
+      .map((link) => document.querySelector(link.href))
+      .filter(Boolean);
+
     const updateActive = () => {
-      const sections = links
-        .map((link) => document.querySelector(link.href))
-        .filter(Boolean);
       if (!sections.length) return;
 
       const navHeight = navRef.current?.offsetHeight ?? 0;

@@ -30,9 +30,9 @@ const useFetchProjects = () => {
       // Update state with fetched projects and mark loading as false
       setProjects(projects);
       setIsLoading(false);
-    } catch (error) {
+    } catch {
       // Log any errors and mark loading as false
-      console.log(error?.response);
+      console.error("Error fetching projects");
       setIsLoading(false);
     }
   };
