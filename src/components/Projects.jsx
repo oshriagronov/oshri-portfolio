@@ -3,6 +3,13 @@ import ProjectsCard from "./ProjectsCard";
 import useFetchProjects from "./fetchProjects";
 import useRevealOnScroll from "../hooks/useRevealOnScroll";
 
+const PROJECTS_INITIAL_LIMIT = 3;
+const REVEAL_BASE_DELAY = 120;
+const REVEAL_STAGGER_DELAY = 90;
+const TITLE_REVEAL_DELAY = "0ms";
+const BUTTON_REVEAL_DELAY = "200ms";
+const EXTRA_PROJECTS_MAX_HEIGHT = "9999px";
+
 const Projects = () => {
   const [openCards, setOpenCards] = useState(() => new Set());
   const [showAll, setShowAll] = useState(false);
@@ -12,8 +19,8 @@ const Projects = () => {
   // Show loading indicator while data is being fetched
   if (isLoading) return <div className="loading"></div>;
   // Render the projects section with a title and a list of project cards
-  const visibleProjects = projects.slice(0, 3);
-  const extraProjects = projects.slice(3);
+  const visibleProjects = projects.slice(0, PROJECTS_INITIAL_LIMIT);
+  const extraProjects = projects.slice(PROJECTS_INITIAL_LIMIT);
 
   const renderProject = (project, index) => {
     const cardId =
@@ -36,7 +43,7 @@ const Projects = () => {
         {...project}
         isOpen={isOpen}
         onToggle={handleToggle}
-        revealDelay={120 + index * 90}
+        revealDelay={REVEAL_BASE_DELAY + index * REVEAL_STAGGER_DELAY}
       />
     );
   };
@@ -50,7 +57,7 @@ const Projects = () => {
       {/* Section title */}
       <h2
         data-reveal
-        style={{ "--reveal-delay": "0ms" }}
+        style={{ "--reveal-delay": TITLE_REVEAL_DELAY }}
         className="reveal-on-scroll text-3xl text-center title mb-12 md:mb-16"
       >
         Some of my recent projects <span className="hidden md:inline-block">🔭</span>
@@ -64,19 +71,21 @@ const Projects = () => {
         <div
           className="overflow-hidden pb-3 transition-[max-height,opacity] duration-300 ease-in-out"
           style={{
-            maxHeight: showAll ? "9999px" : 0,
+            maxHeight: showAll ? EXTRA_PROJECTS_MAX_HEIGHT : 0,
             opacity: showAll ? 1 : 0,
           }}
         >
           <div className="mt-8 grid items-start gap-8 md:gap-10 lg:grid-cols-3">
-            {extraProjects.map((project, index) => renderProject(project, index + 3))}
+            {extraProjects.map((project, index) =>
+              renderProject(project, index + PROJECTS_INITIAL_LIMIT)
+            )}
           </div>
         </div>
       ) : null}
-      {projects.length > 3 ? (
+      {projects.length > PROJECTS_INITIAL_LIMIT ? (
         <div
           data-reveal
-          style={{ "--reveal-delay": "200ms" }}
+          style={{ "--reveal-delay": BUTTON_REVEAL_DELAY }}
           className="reveal-on-scroll mt-10 flex justify-center"
         >
           <button
