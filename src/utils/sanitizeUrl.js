@@ -8,8 +8,8 @@ export const sanitizeUrl = (url) => {
   try {
     // We use a dummy base URL to handle relative URLs
     const parsedUrl = new URL(trimmedUrl, "http://dummy.com");
-    // Check if the protocol is a known dangerous protocol
-    if (["javascript:", "data:", "vbscript:"].includes(parsedUrl.protocol)) {
+    // Check if the protocol is an allowed protocol
+    if (!["http:", "https:"].includes(parsedUrl.protocol)) {
       return undefined;
     }
   } catch {
