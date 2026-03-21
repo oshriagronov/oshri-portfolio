@@ -31,6 +31,7 @@ const Hero = () => {
             <img
               src={meImg}
               alt="Portrait of Oshri"
+              loading="eager"
               className="h-full w-full object-cover"
             />
           </div>

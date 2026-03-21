@@ -33,6 +33,7 @@ const ProjectsCard = ({
         <img
           src={imageSrc}
           alt={title}
+          loading="lazy"
           className="h-full w-full object-cover"
         />
       </div>
