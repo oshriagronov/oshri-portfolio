@@ -31,6 +31,7 @@ const About = () => {
         <img
           src={aboutSvg}
           alt="Moonlight on a forest"
+          loading="lazy"
           data-reveal
           style={{ "--reveal-delay": "200ms" }}
           className="reveal-on-scroll w-full h-64 mt-20"
