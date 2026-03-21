@@ -52,14 +52,14 @@ const ProjectsCard = ({
       <div className="flex flex-col gap-4">
         {/* Action icons for website and GitHub links */}
         <div className="flex">
-          <a href={safeUrl} target="_blank" rel="noreferrer">
+          <a href={safeUrl} target="_blank" rel="noopener noreferrer">
             <TbWorldWww
               className={
                 safeUrl ? "icon-button mr-2 sub-text hover-effect" : "hidden"
               }
             />
           </a>
-          <a href={safeGithub} target="_blank" rel="noreferrer">
+          <a href={safeGithub} target="_blank" rel="noopener noreferrer">
             <FaGithub
               className={
                 safeGithub ? "icon-button mr-2 sub-text hover-effect" : "hidden"
