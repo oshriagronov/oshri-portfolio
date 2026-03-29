@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { FaGithub } from "react-icons/fa6";
 import { TbWorldWww } from "react-icons/tb";
 import { sanitizeUrl } from "../utils/sanitizeUrl.js";
@@ -17,8 +18,8 @@ const ProjectsCard = ({
     "--reveal-delay": `${revealDelay}ms`,
   };
 
-  const safeUrl = sanitizeUrl(url);
-  const safeGithub = sanitizeUrl(github);
+  const safeUrl = useMemo(() => sanitizeUrl(url), [url]);
+  const safeGithub = useMemo(() => sanitizeUrl(github), [github]);
 
   return (
     // Project card layout with grid, shadow, and rounded corners
